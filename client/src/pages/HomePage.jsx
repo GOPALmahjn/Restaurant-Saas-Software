@@ -47,7 +47,7 @@ const HomePage = () => {
           action={
             <Link
               to="/menu"
-              className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              className="group inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/[0.03] px-4 py-2.5 text-sm font-semibold text-surface-900 transition-colors hover:bg-black/[0.06] dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
             >
               Full menu
               <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
@@ -76,7 +76,7 @@ const HomePage = () => {
           action={
             <Link
               to="/menu"
-              className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              className="group inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/[0.03] px-4 py-2.5 text-sm font-semibold text-surface-900 transition-colors hover:bg-black/[0.06] dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
             >
               View all
               <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
@@ -155,7 +155,7 @@ const HomePage = () => {
               whileHover={{ y: -6 }}
               transition={{ type: 'spring', stiffness: 300, damping: 22 }}
               style={{ animationDelay: `${index * 0.1}s` }}
-              className="group animate-fade-in-up relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-colors hover:border-[#FF6B35]/30"
+              className="group animate-fade-in-up relative overflow-hidden rounded-3xl border border-black/[0.07] bg-black/[0.02] p-6 backdrop-blur-xl transition-colors hover:border-[#FF6B35]/30 dark:border-white/10 dark:bg-white/5"
             >
               <Quote
                 size={40}
@@ -163,14 +163,14 @@ const HomePage = () => {
                 aria-hidden="true"
               />
               <Rating value={review.rating} showStars />
-              <blockquote className="mt-4 text-sm leading-relaxed text-white/90">
+              <blockquote className="mt-4 text-sm leading-relaxed text-surface-700 dark:text-white/90">
                 “{review.quote}”
               </blockquote>
               <figcaption className="mt-5 flex items-center gap-3">
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#FF6B35] to-[#FFB347] text-xs font-bold text-white">
                   {review.name.charAt(0)}
                 </span>
-                <span className="text-sm font-semibold text-white">{review.name}</span>
+                <span className="text-sm font-semibold text-surface-900 dark:text-white">{review.name}</span>
               </figcaption>
             </motion.figure>
           ))}
@@ -179,11 +179,11 @@ const HomePage = () => {
 
       {/* Restaurant strip — uses the fetched overview */}
       {restaurant && (
-        <section className="animate-fade-in-up flex flex-col items-center gap-2 rounded-3xl border border-white/10 bg-white/5 p-8 text-center backdrop-blur-xl">
+        <section className="animate-fade-in-up flex flex-col items-center gap-2 rounded-3xl border border-black/[0.07] bg-black/[0.02] p-8 text-center backdrop-blur-xl dark:border-white/10 dark:bg-white/5">
           <Rating value={restaurant.rating} count={restaurant.reviewCount} showStars />
-          <h2 className="mt-2 text-xl font-bold text-white">{restaurant.name}</h2>
-          <p className="max-w-lg text-sm text-[#A0AEC0]">{restaurant.tagline}</p>
-          <p className="mt-1 text-xs text-[#A0AEC0]">
+          <h2 className="mt-2 text-xl font-bold text-surface-900 dark:text-white">{restaurant.name}</h2>
+          <p className="max-w-lg text-sm text-surface-600 dark:text-[#A0AEC0]">{restaurant.tagline}</p>
+          <p className="mt-1 text-xs text-surface-500 dark:text-[#A0AEC0]">
             {restaurant.address} • {restaurant.openingHours}
           </p>
         </section>

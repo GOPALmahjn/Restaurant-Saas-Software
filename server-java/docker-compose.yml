@@ -1,0 +1,23 @@
+# Local infrastructure for the Java backend (Postgres + Redis).
+# For production, point REDIS_URL at Redis Cloud and POSTGRES_* at your managed DB.
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: velvetbloom-postgres
+    environment:
+      POSTGRES_DB: restaurant_ar
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: velvetbloom-redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  pgdata:

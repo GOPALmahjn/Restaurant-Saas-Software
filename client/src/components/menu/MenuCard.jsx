@@ -29,7 +29,7 @@ const MenuCard = ({ item, index = 0 }) => {
       whileHover={{ y: -8 }}
       transition={{ type: 'spring', stiffness: 300, damping: 22 }}
       style={{ animationDelay: `${Math.min(index * 0.06, 0.3)}s` }}
-      className="group animate-fade-in-up relative flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-300 hover:border-[#FF6B35]/30 hover:shadow-[0_28px_80px_-16px_rgba(0,0,0,0.8)]"
+      className="group animate-fade-in-up relative flex flex-col overflow-hidden rounded-3xl border border-black/[0.07] bg-white shadow-[0_4px_24px_rgba(0,0,0,0.06)] backdrop-blur-xl transition-all duration-300 hover:border-[#FF6B35]/30 hover:shadow-[0_28px_80px_-16px_rgba(0,0,0,0.18)] dark:border-white/10 dark:bg-white/5 dark:shadow-none dark:hover:shadow-[0_28px_80px_-16px_rgba(0,0,0,0.8)]"
     >
       {/* Image */}
       <div className="relative h-52 overflow-hidden">
@@ -98,7 +98,7 @@ const MenuCard = ({ item, index = 0 }) => {
       <div className="flex flex-1 flex-col gap-3 p-5">
         <div className="flex items-start justify-between gap-3">
           <Link to={`/menu/${item.id}`} className="min-w-0 flex-1">
-            <h3 className="truncate text-base font-semibold text-white transition-colors hover:text-[#FF6B35]">
+            <h3 className="truncate text-base font-semibold text-surface-900 transition-colors hover:text-[#FF6B35] dark:text-white">
               {item.name}
             </h3>
           </Link>
@@ -113,14 +113,14 @@ const MenuCard = ({ item, index = 0 }) => {
           </div>
         </div>
 
-        <p className="line-clamp-2 text-xs leading-relaxed text-[#A0AEC0]">{item.description}</p>
+        <p className="line-clamp-2 text-xs leading-relaxed text-surface-600 dark:text-[#A0AEC0]">{item.description}</p>
 
         {/* Meta */}
-        <div className="flex flex-wrap gap-1.5 text-[11px] text-[#A0AEC0]">
-          <span className="inline-flex items-center gap-1 rounded-full bg-white/5 px-2.5 py-1">
+        <div className="flex flex-wrap gap-1.5 text-[11px] text-surface-600 dark:text-[#A0AEC0]">
+          <span className="inline-flex items-center gap-1 rounded-full bg-black/[0.04] px-2.5 py-1 dark:bg-white/5">
             <Clock size={11} aria-hidden="true" /> {item.prepTime} min
           </span>
-          <span className="inline-flex items-center gap-1 rounded-full bg-white/5 px-2.5 py-1">
+          <span className="inline-flex items-center gap-1 rounded-full bg-black/[0.04] px-2.5 py-1 dark:bg-white/5">
             <Flame size={11} aria-hidden="true" /> {item.calories} kcal
           </span>
         </div>
@@ -129,7 +129,7 @@ const MenuCard = ({ item, index = 0 }) => {
         <div className="mt-auto flex gap-2 pt-2">
           <Link
             to={`/menu/${item.id}`}
-            className="inline-flex flex-1 items-center justify-center rounded-full border border-white/10 bg-white/5 px-3 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-white/10"
+            className="inline-flex flex-1 items-center justify-center rounded-full border border-black/10 bg-black/[0.03] px-3 py-2.5 text-xs font-semibold text-surface-900 transition-colors hover:bg-black/[0.06] dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
           >
             Details
           </Link>

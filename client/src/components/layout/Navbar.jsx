@@ -35,11 +35,6 @@ const Navbar = () => {
 
   useMotionValueEvent(scrollY, 'change', (latest) => setScrolled(latest > 12));
 
-  // Reflect the theme toggle on <html> so the CSS theme actually switches.
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-  }, [theme]);
-
   useEffect(() => {
     setMobileNavOpen(false);
   }, [location.pathname, location.hash, setMobileNavOpen]);
@@ -47,7 +42,21 @@ const Navbar = () => {
   const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const isLinkActive = (link) => {
-    if (link.to.includes('#')) return false;
+    const [rawPath, sectionHash] = link.to.split('#');
+    const targetPath = rawPath || '/';
+
+    // Section links (e.g. "/#categories") are active only when we're on their
+    // page AND their section is the one in the URL hash.
+    if (sectionHash) {
+      return location.pathname === targetPath && location.hash === `#${sectionHash}`;
+    }
+
+    // Home should yield to a section link when a hash is present, so the pill
+    // moves to Categories / Today's Specials instead of staying on Home.
+    if (link.to === '/') {
+      return location.pathname === '/' && !location.hash;
+    }
+
     return location.pathname === link.to;
   };
 
@@ -61,14 +70,16 @@ const Navbar = () => {
       >
         <motion.nav
           animate={{
-            backgroundColor: scrolled ? 'rgba(7,11,22,0.82)' : 'rgba(255,255,255,0.04)',
-            borderColor: scrolled ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.08)',
             boxShadow: scrolled
               ? '0 20px 60px -20px rgba(0,0,0,0.9)'
               : '0 8px 32px -16px rgba(0,0,0,0.5)',
           }}
           transition={{ duration: 0.35, ease: 'easeOut' }}
-          className="mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-3xl border px-3 py-2.5 backdrop-blur-2xl sm:px-4 sm:py-3"
+          className={`mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-3xl border px-3 py-2.5 backdrop-blur-2xl transition-colors sm:px-4 sm:py-3 ${
+            scrolled
+              ? 'border-black/10 bg-white/85 dark:border-white/12 dark:bg-[#070B16]/85'
+              : 'border-black/5 bg-white/70 dark:border-white/8 dark:bg-white/5'
+          }`}
         >
           {/* Brand */}
           <Link
@@ -84,7 +95,7 @@ const Navbar = () => {
               {restaurant.logo}
             </motion.div>
             <div className="hidden sm:block">
-              <p className="text-[15px] font-semibold leading-tight tracking-tight text-white">
+              <p className="text-[15px] font-semibold leading-tight tracking-tight text-surface-900 dark:text-white">
                 {restaurant.name}
               </p>
               <p className="text-[11px] leading-tight text-[#A0AEC0]">AR Dining</p>
@@ -99,8 +110,8 @@ const Navbar = () => {
                 to={link.to}
                 className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                   isLinkActive(link)
-                    ? 'text-white'
-                    : 'text-[#A0AEC0] hover:text-white'
+                    ? 'text-surface-900 dark:text-white'
+                    : 'text-surface-500 hover:text-surface-900 dark:text-[#A0AEC0] dark:hover:text-white'
                 }`}
               >
                 {isLinkActive(link) && (
@@ -231,7 +242,7 @@ const IconButton = ({ children, label, className = '', ...props }) => (
     whileTap={{ scale: 0.92 }}
     aria-label={label}
     title={label}
-    className={`inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-[#A0AEC0] transition-colors hover:bg-white/10 hover:text-white ${className}`}
+    className={`inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-black/5 text-surface-500 transition-colors hover:bg-black/10 hover:text-surface-900 dark:border-white/10 dark:bg-white/5 dark:text-[#A0AEC0] dark:hover:bg-white/10 dark:hover:text-white ${className}`}
     {...props}
   >
     {children}

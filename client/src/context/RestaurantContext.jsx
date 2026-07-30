@@ -1,12 +1,29 @@
-import { createContext, useContext, useMemo, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 const RestaurantContext = createContext(null);
+
+const THEME_KEY = 'velvet-bloom-theme';
+
+const getInitialTheme = () => {
+  if (typeof window === 'undefined') return 'dark';
+  const stored = window.localStorage.getItem(THEME_KEY);
+  return stored === 'light' || stored === 'dark' ? stored : 'light';
+};
 
 export const RestaurantProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [selectedTable, setSelectedTable] = useState('12');
   const [couponCode, setCouponCode] = useState('');
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState(getInitialTheme);
+
+  // Single source of truth for the theme: reflect it on <html> and persist it
+  // so the choice survives reloads.
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle('dark', theme === 'dark');
+    root.style.colorScheme = theme;
+    window.localStorage.setItem(THEME_KEY, theme);
+  }, [theme]);
 
   const addToCart = (item) => {
     setCart((current) => {

@@ -38,7 +38,7 @@ const CategoryGrid = () => {
           transition={{ type: 'spring', stiffness: 300, damping: 20 }}
           onClick={() => navigate(`/menu?category=${category.id}`)}
           aria-label={`Browse ${category.name}`}
-          className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-0 text-left backdrop-blur-xl transition-colors hover:border-[#FF6B35]/40"
+          className="group relative overflow-hidden rounded-3xl border border-black/10 bg-black/[0.03] p-0 text-left backdrop-blur-xl transition-colors hover:border-[#FF6B35]/40 dark:border-white/10 dark:bg-white/5"
         >
           {/* Food image */}
           <div className="relative h-24 w-full overflow-hidden sm:h-28">
@@ -68,7 +68,7 @@ const CategoryGrid = () => {
             >
               {category.emoji}
             </motion.span>
-            <span className="text-sm font-semibold text-white transition-colors group-hover:text-[#FF6B35]">
+            <span className="text-sm font-semibold text-surface-900 transition-colors group-hover:text-[#FF6B35] dark:text-white">
               {category.name}
             </span>
           </div>

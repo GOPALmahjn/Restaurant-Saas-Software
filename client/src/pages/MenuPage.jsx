@@ -72,7 +72,7 @@ const MenuPage = () => {
   return (
     <div className="space-y-8 pt-2">
       {/* Header + search */}
-      <div className="flex flex-col gap-6 rounded-[28px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl sm:p-8 lg:flex-row lg:items-end lg:justify-between">
+      <div className="flex flex-col gap-6 rounded-[28px] border border-black/[0.07] bg-black/[0.02] p-6 backdrop-blur-xl sm:p-8 lg:flex-row lg:items-end lg:justify-between dark:border-white/10 dark:bg-white/5">
         <SectionTitle
           eyebrow="Explore"
           title="Full restaurant menu"
@@ -80,7 +80,7 @@ const MenuPage = () => {
         />
 
         <div className="flex flex-wrap gap-2.5">
-          <label className="flex min-w-0 flex-1 items-center gap-2 rounded-full border border-white/10 bg-[#070B16]/60 px-4 py-3 text-sm text-white transition-colors focus-within:border-[#FF6B35]/50 sm:flex-none">
+          <label className="flex min-w-0 flex-1 items-center gap-2 rounded-full border border-black/10 bg-black/[0.03] px-4 py-3 text-sm text-surface-900 transition-colors focus-within:border-[#FF6B35]/50 sm:flex-none dark:border-white/10 dark:bg-[#070B16]/60 dark:text-white">
             <Search size={15} className="shrink-0 text-[#FF6B35]" aria-hidden="true" />
             <input
               value={query}
@@ -94,7 +94,7 @@ const MenuPage = () => {
                 type="button"
                 onClick={() => setQuery('')}
                 aria-label="Clear search"
-                className="shrink-0 text-[#A0AEC0] hover:text-white"
+                className="shrink-0 text-surface-500 hover:text-surface-900 dark:text-[#A0AEC0] dark:hover:text-white"
               >
                 <X size={13} />
               </button>
@@ -108,7 +108,7 @@ const MenuPage = () => {
             className={`inline-flex items-center gap-2 rounded-full border px-4 py-3 text-sm font-medium transition-colors ${
               showFilters
                 ? 'border-[#FF6B35]/40 bg-[#FF6B35]/12 text-[#FF6B35]'
-                : 'border-white/10 bg-white/5 text-white hover:bg-white/10'
+                : 'border-black/10 bg-black/[0.03] text-surface-900 hover:bg-black/[0.06] dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10'
             }`}
           >
             <SlidersHorizontal size={15} /> Filter
@@ -126,8 +126,8 @@ const MenuPage = () => {
             transition={{ duration: 0.25 }}
             className="overflow-hidden"
           >
-            <div className="flex flex-wrap items-center gap-3 rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
-              <span className="text-xs font-semibold uppercase tracking-wider text-[#A0AEC0]">
+            <div className="flex flex-wrap items-center gap-3 rounded-3xl border border-black/[0.07] bg-black/[0.02] p-4 backdrop-blur-xl dark:border-white/10 dark:bg-white/5">
+              <span className="text-xs font-semibold uppercase tracking-wider text-surface-500 dark:text-[#A0AEC0]">
                 Sort
               </span>
               {SORTS.map((option) => (
@@ -139,14 +139,14 @@ const MenuPage = () => {
                   className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors ${
                     sort === option.id
                       ? 'bg-gradient-to-r from-[#FF6B35] to-[#F97316] text-white'
-                      : 'bg-white/5 text-[#A0AEC0] hover:bg-white/10 hover:text-white'
+                      : 'bg-black/[0.04] text-surface-600 hover:bg-black/[0.08] hover:text-surface-900 dark:bg-white/5 dark:text-[#A0AEC0] dark:hover:bg-white/10 dark:hover:text-white'
                   }`}
                 >
                   {option.label}
                 </button>
               ))}
 
-              <span className="mx-1 h-4 w-px bg-white/10" aria-hidden="true" />
+              <span className="mx-1 h-4 w-px bg-black/10 dark:bg-white/10" aria-hidden="true" />
 
               <button
                 type="button"
@@ -155,7 +155,7 @@ const MenuPage = () => {
                 className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors ${
                   favoritesOnly
                     ? 'bg-[#FF6B35]/15 text-[#FF6B35]'
-                    : 'bg-white/5 text-[#A0AEC0] hover:bg-white/10 hover:text-white'
+                    : 'bg-black/[0.04] text-surface-600 hover:bg-black/[0.08] hover:text-surface-900 dark:bg-white/5 dark:text-[#A0AEC0] dark:hover:bg-white/10 dark:hover:text-white'
                 }`}
               >
                 <Heart size={12} className={favoritesOnly ? 'fill-[#FF6B35]' : ''} />
@@ -178,7 +178,7 @@ const MenuPage = () => {
             className={`relative shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
               activeCategory === category.id
                 ? 'text-white'
-                : 'bg-white/5 text-[#A0AEC0] hover:bg-white/10 hover:text-white'
+                : 'bg-black/[0.04] text-surface-600 hover:bg-black/[0.08] hover:text-surface-900 dark:bg-white/5 dark:text-[#A0AEC0] dark:hover:bg-white/10 dark:hover:text-white'
             }`}
           >
             {activeCategory === category.id && (
@@ -197,7 +197,7 @@ const MenuPage = () => {
 
       {/* Result count */}
       {!loading && (
-        <p className="text-sm text-[#A0AEC0]">
+        <p className="text-sm text-surface-600 dark:text-[#A0AEC0]">
           {filteredItems.length} {filteredItems.length === 1 ? 'dish' : 'dishes'}
           {activeCategory !== 'all' && ' in this category'}
         </p>
@@ -214,12 +214,12 @@ const MenuPage = () => {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex flex-col items-center gap-4 rounded-3xl border border-dashed border-white/10 bg-white/5 p-14 text-center"
+          className="flex flex-col items-center gap-4 rounded-3xl border border-dashed border-black/10 bg-black/[0.02] p-14 text-center dark:border-white/10 dark:bg-white/5"
         >
           <span className="text-4xl">🔍</span>
           <div>
-            <p className="font-semibold text-white">No dishes found</p>
-            <p className="mt-1 text-sm text-[#A0AEC0]">
+            <p className="font-semibold text-surface-900 dark:text-white">No dishes found</p>
+            <p className="mt-1 text-sm text-surface-600 dark:text-[#A0AEC0]">
               Try a different category or clear your search.
             </p>
           </div>

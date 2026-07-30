@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Drive the `dark:` variant off the `.dark` class on <html> (set from
+   RestaurantContext) instead of the OS preference, so the toggle controls it. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ============================================================
    DESIGN TOKENS — premium AR dining system
    ============================================================ */

@@ -48,7 +48,7 @@ const DishDetailPage = () => {
             <Skeleton className="h-32 rounded-3xl" />
           </div>
         </div>
-        <div className="space-y-4 rounded-[28px] border border-white/10 bg-white/5 p-8">
+        <div className="space-y-4 rounded-[28px] border border-black/[0.07] bg-black/[0.02] p-8 dark:border-white/10 dark:bg-white/5">
           <Skeleton className="h-4 w-28" />
           <Skeleton className="h-9 w-3/4" />
           <Skeleton className="h-4 w-full" />
@@ -76,7 +76,7 @@ const DishDetailPage = () => {
     <div className="space-y-8 pt-2">
       <Link
         to="/menu"
-        className="inline-flex items-center gap-2 text-sm text-[#A0AEC0] transition-colors hover:text-white"
+        className="inline-flex items-center gap-2 text-sm text-surface-600 transition-colors hover:text-surface-900 dark:text-[#A0AEC0] dark:hover:text-white"
       >
         <ArrowLeft size={15} /> Back to menu
       </Link>
@@ -88,7 +88,7 @@ const DishDetailPage = () => {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="relative overflow-hidden rounded-[28px] border border-white/10"
+            className="relative overflow-hidden rounded-[28px] border border-black/[0.07] dark:border-white/10"
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -145,7 +145,7 @@ const DishDetailPage = () => {
                   aria-label={`View image ${index + 1}`}
                   aria-current={activeImage === index}
                   className={`overflow-hidden rounded-3xl border-2 transition-colors ${
-                    activeImage === index ? 'border-[#FF6B35]' : 'border-white/10'
+                    activeImage === index ? 'border-[#FF6B35]' : 'border-black/[0.07] dark:border-white/10'
                   }`}
                 >
                   <LazyImage
@@ -165,14 +165,14 @@ const DishDetailPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="space-y-6 rounded-[28px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl sm:p-8 lg:sticky lg:top-28"
+          className="space-y-6 rounded-[28px] border border-black/[0.07] bg-black/[0.02] p-6 backdrop-blur-xl sm:p-8 lg:sticky lg:top-28 dark:border-white/10 dark:bg-white/5"
         >
           <div className="flex items-start justify-between gap-4">
             <div>
               <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#FF6B35]">
                 Chef signature
               </span>
-              <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-white">
+              <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-surface-900 dark:text-white">
                 {dish.name}
               </h1>
               <div className="mt-2">
@@ -182,13 +182,13 @@ const DishDetailPage = () => {
 
             <div className="shrink-0 rounded-2xl bg-[#FF6B35]/12 px-4 py-2.5 text-right">
               {discountPercent > 0 && (
-                <span className="block text-xs text-[#A0AEC0] line-through">${dish.mrp}</span>
+                <span className="block text-xs text-surface-500 line-through dark:text-[#A0AEC0]">${dish.mrp}</span>
               )}
               <span className="text-xl font-extrabold text-[#FF6B35]">${dish.price}</span>
             </div>
           </div>
 
-          <p className="text-sm leading-relaxed text-[#A0AEC0]">{dish.description}</p>
+          <p className="text-sm leading-relaxed text-surface-600 dark:text-[#A0AEC0]">{dish.description}</p>
 
           {/* Meta */}
           <div className="grid grid-cols-3 gap-2.5">
@@ -200,14 +200,14 @@ const DishDetailPage = () => {
           {/* Ingredients */}
           {dish.ingredients?.length ? (
             <section>
-              <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-white">
+              <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-surface-900 dark:text-white">
                 Ingredients
               </h2>
               <div className="flex flex-wrap gap-2">
                 {dish.ingredients.map((ingredient) => (
                   <span
                     key={ingredient}
-                    className="rounded-full border border-white/10 bg-[#070B16]/50 px-3 py-1.5 text-xs text-[#A0AEC0]"
+                    className="rounded-full border border-black/[0.07] bg-black/[0.03] px-3 py-1.5 text-xs text-surface-600 dark:border-white/10 dark:bg-[#070B16]/50 dark:text-[#A0AEC0]"
                   >
                     {ingredient}
                   </span>
@@ -219,7 +219,7 @@ const DishDetailPage = () => {
           {/* Allergens */}
           {dish.allergens?.length ? (
             <section>
-              <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-white">
+              <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-surface-900 dark:text-white">
                 Allergen info
               </h2>
               <div className="flex flex-wrap gap-2">
@@ -238,17 +238,17 @@ const DishDetailPage = () => {
           {/* Nutrition */}
           {dish.nutritionFacts ? (
             <section>
-              <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-white">
+              <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-surface-900 dark:text-white">
                 Nutrition
               </h2>
               <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
                 {Object.entries(dish.nutritionFacts).map(([key, value]) => (
                   <div
                     key={key}
-                    className="rounded-2xl border border-white/10 bg-[#070B16]/40 p-2.5 text-center"
+                    className="rounded-2xl border border-black/[0.07] bg-black/[0.03] p-2.5 text-center dark:border-white/10 dark:bg-[#070B16]/40"
                   >
-                    <p className="text-sm font-bold text-white">{value}</p>
-                    <p className="mt-0.5 text-[10px] capitalize text-[#A0AEC0]">{key}</p>
+                    <p className="text-sm font-bold text-surface-900 dark:text-white">{value}</p>
+                    <p className="mt-0.5 text-[10px] capitalize text-surface-600 dark:text-[#A0AEC0]">{key}</p>
                   </div>
                 ))}
               </div>
@@ -283,7 +283,7 @@ const DishDetailPage = () => {
             <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }} className="flex-1">
               <Link
                 to={`/ar/${dish.id}`}
-                className="ar-pulse inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                className="ar-pulse inline-flex w-full items-center justify-center gap-2 rounded-full border border-black/10 bg-black/[0.03] px-5 py-3.5 text-sm font-semibold text-surface-900 transition-colors hover:bg-black/[0.06] dark:border-white/15 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
               >
                 <Scan size={16} className="text-[#FF6B35]" /> View in AR
               </Link>
@@ -296,10 +296,10 @@ const DishDetailPage = () => {
 };
 
 const Stat = ({ icon: Icon, value, label }) => (
-  <div className="rounded-2xl border border-white/10 bg-[#070B16]/40 p-3 text-center">
+  <div className="rounded-2xl border border-black/[0.07] bg-black/[0.03] p-3 text-center dark:border-white/10 dark:bg-[#070B16]/40">
     <Icon size={15} className="mx-auto text-[#FF6B35]" aria-hidden="true" />
-    <p className="mt-1.5 text-sm font-bold text-white">{value}</p>
-    <p className="text-[10px] text-[#A0AEC0]">{label}</p>
+    <p className="mt-1.5 text-sm font-bold text-surface-900 dark:text-white">{value}</p>
+    <p className="text-[10px] text-surface-600 dark:text-[#A0AEC0]">{label}</p>
   </div>
 );
 
