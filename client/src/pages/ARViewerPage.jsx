@@ -222,18 +222,18 @@ const ARViewerPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
-            className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 p-6 text-center backdrop-blur-xl"
+            className="relative overflow-hidden rounded-[28px] border border-black/[0.07] bg-black/[0.02] p-6 text-center backdrop-blur-xl dark:border-white/10 dark:bg-white/5"
           >
             <div
               className="pointer-events-none absolute -left-10 top-0 h-40 w-40 rounded-full bg-[#FF6B35]/15 blur-[60px]"
               aria-hidden="true"
             />
 
-            <h2 className="relative flex items-center justify-center gap-2 text-base font-bold text-white">
+            <h2 className="relative flex items-center justify-center gap-2 text-base font-bold text-surface-900 dark:text-white">
               <Scan size={15} className="text-[#FF6B35]" aria-hidden="true" />
               View on your Table
             </h2>
-            <p className="relative mt-1.5 text-xs text-[#A0AEC0]">
+            <p className="relative mt-1.5 text-xs text-surface-600 dark:text-[#A0AEC0]">
               Scan with your phone camera to launch AR.
             </p>
 
@@ -291,9 +291,9 @@ const ARViewerPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25 }}
-            className="rounded-[28px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
+            className="rounded-[28px] border border-black/[0.07] bg-black/[0.02] p-6 backdrop-blur-xl dark:border-white/10 dark:bg-white/5"
           >
-            <h2 className="flex items-center gap-2 text-base font-bold text-white">
+            <h2 className="flex items-center gap-2 text-base font-bold text-surface-900 dark:text-white">
               <Hand size={15} className="text-[#FF6B35]" aria-hidden="true" />
               Controls
             </h2>
@@ -305,8 +305,8 @@ const ARViewerPage = () => {
                     <gesture.icon size={15} />
                   </span>
                   <div>
-                    <p className="text-sm font-semibold text-white">{gesture.label}</p>
-                    <p className="text-xs text-[#A0AEC0]">{gesture.hint}</p>
+                    <p className="text-sm font-semibold text-surface-900 dark:text-white">{gesture.label}</p>
+                    <p className="text-xs text-surface-600 dark:text-[#A0AEC0]">{gesture.hint}</p>
                   </div>
                 </li>
               ))}
@@ -318,9 +318,9 @@ const ARViewerPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35 }}
-            className="rounded-[28px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
+            className="rounded-[28px] border border-black/[0.07] bg-black/[0.02] p-6 backdrop-blur-xl dark:border-white/10 dark:bg-white/5"
           >
-            <h2 className="flex items-center gap-2 text-base font-bold text-white">
+            <h2 className="flex items-center gap-2 text-base font-bold text-surface-900 dark:text-white">
               <Lightbulb size={15} className="text-[#FFB347]" aria-hidden="true" />
               Instructions
             </h2>
@@ -328,10 +328,10 @@ const ARViewerPage = () => {
             <ol className="mt-4 space-y-3">
               {AR_INSTRUCTIONS.map((instruction, index) => (
                 <li key={instruction.text} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/5 text-[10px] font-bold text-[#FF6B35]">
+                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-black/[0.04] text-[10px] font-bold text-[#FF6B35] dark:bg-white/5">
                     {index + 1}
                   </span>
-                  <p className="text-xs leading-relaxed text-[#A0AEC0]">
+                  <p className="text-xs leading-relaxed text-surface-600 dark:text-[#A0AEC0]">
                     <span className="mr-1.5" aria-hidden="true">
                       {instruction.icon}
                     </span>

@@ -26,12 +26,12 @@ const SectionTitle = ({ eyebrow, title, description, action, align = 'left' }) =
           </span>
         ) : null}
 
-        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+        <h2 className="text-3xl font-bold tracking-tight text-surface-900 dark:text-white sm:text-4xl">
           {title}
         </h2>
 
         {description ? (
-          <p className="max-w-2xl text-base leading-relaxed text-[#A0AEC0]">{description}</p>
+          <p className="max-w-2xl text-base leading-relaxed text-surface-600 dark:text-[#A0AEC0]">{description}</p>
         ) : null}
       </motion.div>
 

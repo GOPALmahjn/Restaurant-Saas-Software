@@ -35,7 +35,7 @@ const SpecialsCarousel = () => {
 
   return (
     <div
-      className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 backdrop-blur-xl"
+      className="relative overflow-hidden rounded-[28px] border border-black/10 bg-[#0B1120] backdrop-blur-xl dark:border-white/10"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}

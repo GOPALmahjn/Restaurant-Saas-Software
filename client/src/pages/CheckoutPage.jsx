@@ -163,9 +163,9 @@ const CheckoutPage = () => {
   /* ---------------- Form ---------------- */
   return (
     <div className="grid gap-8 pt-2 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-      <div className="rounded-[28px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl sm:p-8">
-        <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">Checkout</h1>
-        <p className="mt-1.5 text-sm text-[#A0AEC0]">
+      <div className="rounded-[28px] border border-black/[0.07] bg-black/[0.02] p-6 backdrop-blur-xl sm:p-8 dark:border-white/10 dark:bg-white/5">
+        <h1 className="text-2xl font-bold tracking-tight text-surface-900 sm:text-3xl dark:text-white">Checkout</h1>
+        <p className="mt-1.5 text-sm text-surface-600 dark:text-[#A0AEC0]">
           Enter your details and confirm your table-side order.
         </p>
 
@@ -194,7 +194,7 @@ const CheckoutPage = () => {
                   </motion.span>
                   <span
                     className={`hidden text-xs font-semibold sm:block ${
-                      active ? 'text-white' : 'text-[#A0AEC0]'
+                      active ? 'text-surface-900 dark:text-white' : 'text-surface-600 dark:text-[#A0AEC0]'
                     }`}
                   >
                     {entry.label}
@@ -202,7 +202,7 @@ const CheckoutPage = () => {
                 </button>
 
                 {index < STEPS.length - 1 && (
-                  <div className="mx-3 h-px flex-1 overflow-hidden bg-white/10">
+                  <div className="mx-3 h-px flex-1 overflow-hidden bg-black/10 dark:bg-white/10">
                     <motion.div
                       initial={false}
                       animate={{ scaleX: done ? 1 : 0 }}
@@ -234,7 +234,7 @@ const CheckoutPage = () => {
                     onChange={(event) => setCustomerName(event.target.value)}
                     placeholder="Customer name"
                     aria-label="Customer name"
-                    className="w-full bg-transparent text-sm text-white outline-none placeholder:text-[#A0AEC0]/60"
+                    className="w-full bg-transparent text-sm text-surface-900 outline-none placeholder:text-[#A0AEC0]/60 dark:text-white"
                   />
                 </Field>
 
@@ -244,7 +244,7 @@ const CheckoutPage = () => {
                     onChange={(event) => setPhone(event.target.value)}
                     placeholder="Phone number"
                     aria-label="Phone number"
-                    className="w-full bg-transparent text-sm text-white outline-none placeholder:text-[#A0AEC0]/60"
+                    className="w-full bg-transparent text-sm text-surface-900 outline-none placeholder:text-[#A0AEC0]/60 dark:text-white"
                   />
                 </Field>
 
@@ -254,7 +254,7 @@ const CheckoutPage = () => {
                     onChange={(event) => setSelectedTable(event.target.value)}
                     placeholder="Table number"
                     aria-label="Table number"
-                    className="w-full bg-transparent text-sm text-white outline-none placeholder:text-[#A0AEC0]/60"
+                    className="w-full bg-transparent text-sm text-surface-900 outline-none placeholder:text-[#A0AEC0]/60 dark:text-white"
                   />
                 </Field>
               </motion.div>
@@ -282,25 +282,25 @@ const CheckoutPage = () => {
                       className={`flex w-full items-center gap-4 rounded-2xl border p-4 text-left transition-colors ${
                         active
                           ? 'border-[#FF6B35]/50 bg-[#FF6B35]/10'
-                          : 'border-white/10 bg-white/5 hover:bg-white/8'
+                          : 'border-black/[0.07] bg-black/[0.02] hover:bg-black/[0.04] dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/8'
                       }`}
                     >
                       <span
                         className={`flex h-11 w-11 items-center justify-center rounded-xl ${
-                          active ? 'bg-[#FF6B35] text-white' : 'bg-white/5 text-[#A0AEC0]'
+                          active ? 'bg-[#FF6B35] text-white' : 'bg-black/[0.04] text-surface-600 dark:bg-white/5 dark:text-[#A0AEC0]'
                         }`}
                       >
                         <method.icon size={18} />
                       </span>
                       <span className="flex-1">
-                        <span className="block text-sm font-semibold text-white">
+                        <span className="block text-sm font-semibold text-surface-900 dark:text-white">
                           {method.label}
                         </span>
-                        <span className="block text-xs text-[#A0AEC0]">{method.hint}</span>
+                        <span className="block text-xs text-surface-600 dark:text-[#A0AEC0]">{method.hint}</span>
                       </span>
                       <span
                         className={`flex h-5 w-5 items-center justify-center rounded-full border-2 ${
-                          active ? 'border-[#FF6B35]' : 'border-white/20'
+                          active ? 'border-[#FF6B35]' : 'border-black/20 dark:border-white/20'
                         }`}
                       >
                         {active && (
@@ -341,7 +341,7 @@ const CheckoutPage = () => {
               <button
                 type="button"
                 onClick={() => setStep((value) => value - 1)}
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/[0.03] px-5 py-3 text-sm font-semibold text-surface-900 transition-colors hover:bg-black/[0.06] dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
               >
                 <ArrowLeft size={15} /> Back
               </button>
@@ -388,12 +388,12 @@ const CheckoutPage = () => {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="rounded-[28px] border border-white/10 bg-gradient-to-b from-white/8 to-white/4 p-6 backdrop-blur-xl sm:p-8 lg:sticky lg:top-28"
+        className="rounded-[28px] border border-black/[0.07] bg-black/[0.02] p-6 backdrop-blur-xl sm:p-8 lg:sticky lg:top-28 dark:border-white/10 dark:bg-gradient-to-b dark:from-white/8 dark:to-white/4"
       >
-        <h2 className="text-xl font-bold text-white">Order preview</h2>
+        <h2 className="text-xl font-bold text-surface-900 dark:text-white">Order preview</h2>
 
         {cart.length === 0 ? (
-          <p className="mt-5 text-sm text-[#A0AEC0]">
+          <p className="mt-5 text-sm text-surface-600 dark:text-[#A0AEC0]">
             Your cart is empty —{' '}
             <Link to="/menu" className="text-[#FF6B35] hover:underline">
               add a dish
@@ -411,10 +411,10 @@ const CheckoutPage = () => {
                   className="h-11 w-11 rounded-xl object-cover"
                 />
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm text-white">{item.name}</p>
-                  <p className="text-xs text-[#A0AEC0]">× {item.quantity}</p>
+                  <p className="truncate text-sm text-surface-900 dark:text-white">{item.name}</p>
+                  <p className="text-xs text-surface-600 dark:text-[#A0AEC0]">× {item.quantity}</p>
                 </div>
-                <span className="text-sm font-semibold text-white">
+                <span className="text-sm font-semibold text-surface-900 dark:text-white">
                   ${(item.price * item.quantity).toFixed(2)}
                 </span>
               </li>
@@ -422,30 +422,30 @@ const CheckoutPage = () => {
           </ul>
         )}
 
-        <dl className="mt-6 space-y-2 border-t border-white/10 pt-4 text-sm">
+        <dl className="mt-6 space-y-2 border-t border-black/10 pt-4 text-sm dark:border-white/10">
           <div className="flex justify-between">
-            <dt className="text-[#A0AEC0]">Subtotal</dt>
-            <dd className="text-white">${subtotal.toFixed(2)}</dd>
+            <dt className="text-surface-600 dark:text-[#A0AEC0]">Subtotal</dt>
+            <dd className="text-surface-900 dark:text-white">${subtotal.toFixed(2)}</dd>
           </div>
           {discount > 0 && (
             <div className="flex justify-between">
-              <dt className="text-[#A0AEC0]">Discount</dt>
+              <dt className="text-surface-600 dark:text-[#A0AEC0]">Discount</dt>
               <dd className="text-emerald-400">-${discount.toFixed(2)}</dd>
             </div>
           )}
           <div className="flex justify-between">
-            <dt className="text-[#A0AEC0]">GST</dt>
-            <dd className="text-white">${gst.toFixed(2)}</dd>
+            <dt className="text-surface-600 dark:text-[#A0AEC0]">GST</dt>
+            <dd className="text-surface-900 dark:text-white">${gst.toFixed(2)}</dd>
           </div>
           <div className="flex justify-between">
-            <dt className="text-[#A0AEC0]">Delivery</dt>
-            <dd className="text-white">${delivery.toFixed(2)}</dd>
+            <dt className="text-surface-600 dark:text-[#A0AEC0]">Delivery</dt>
+            <dd className="text-surface-900 dark:text-white">${delivery.toFixed(2)}</dd>
           </div>
         </dl>
 
-        <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-4">
-          <span className="font-semibold text-white">Total</span>
-          <span className="text-2xl font-extrabold text-white">${total.toFixed(2)}</span>
+        <div className="mt-4 flex items-center justify-between border-t border-black/10 pt-4 dark:border-white/10">
+          <span className="font-semibold text-surface-900 dark:text-white">Total</span>
+          <span className="text-2xl font-extrabold text-surface-900 dark:text-white">${total.toFixed(2)}</span>
         </div>
       </motion.aside>
     </div>
@@ -453,7 +453,7 @@ const CheckoutPage = () => {
 };
 
 const Field = ({ label, icon: Icon, children }) => (
-  <label className="flex items-center gap-3 rounded-2xl border border-white/10 bg-[#070B16]/50 px-4 py-3 transition-colors focus-within:border-[#FF6B35]/50">
+  <label className="flex items-center gap-3 rounded-2xl border border-black/[0.07] bg-black/[0.03] px-4 py-3 transition-colors focus-within:border-[#FF6B35]/50 dark:border-white/10 dark:bg-[#070B16]/50">
     <Icon size={15} className="shrink-0 text-[#FF6B35]" aria-hidden="true" />
     <span className="sr-only">{label}</span>
     {children}
@@ -461,9 +461,9 @@ const Field = ({ label, icon: Icon, children }) => (
 );
 
 const Summary = ({ label, value }) => (
-  <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-    <span className="text-sm text-[#A0AEC0]">{label}</span>
-    <span className="text-sm font-semibold text-white">{value}</span>
+  <div className="flex items-center justify-between rounded-2xl border border-black/[0.07] bg-black/[0.02] px-4 py-3 dark:border-white/10 dark:bg-white/5">
+    <span className="text-sm text-surface-600 dark:text-[#A0AEC0]">{label}</span>
+    <span className="text-sm font-semibold text-surface-900 dark:text-white">{value}</span>
   </div>
 );
 

@@ -5,7 +5,7 @@ import SearchModal from '../search/SearchModal';
 
 const Layout = ({ children }) => {
   return (
-    <div className="relative min-h-screen bg-[#070B16] text-white">
+    <div className="relative min-h-screen bg-surface-50 text-surface-900 transition-colors duration-300 dark:bg-[#070B16] dark:text-white">
       {/* Ambient page glows */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
         <div className="absolute -left-40 top-0 h-[32rem] w-[32rem] rounded-full bg-[#FF6B35]/8 blur-[120px]" />

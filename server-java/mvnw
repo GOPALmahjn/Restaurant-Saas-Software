@@ -1,0 +1,125 @@
+#!/bin/sh
+# ----------------------------------------------------------------------------
+# Apache Maven Wrapper startup batch script (only-script distribution)
+# ----------------------------------------------------------------------------
+set -euf
+[ "${MVNW_VERBOSE-}" != debug ] || set -x
+
+# OS specific support.
+native_path() { printf %s\\n "$1"; }
+case "$(uname)" in
+CYGWIN* | MINGW*)
+  [ -z "${JAVA_HOME-}" ] || JAVA_HOME="$(cygpath --unix "$JAVA_HOME")"
+  native_path() { cygpath --path --windows "$1"; }
+  ;;
+esac
+
+# set JAVACMD and JAVACCMD
+set_java_home() {
+  if [ -n "${JAVA_HOME-}" ]; then
+    if [ -x "$JAVA_HOME/jre/sh/java" ]; then
+      JAVACMD="$JAVA_HOME/jre/sh/java"
+    else
+      JAVACMD="$JAVA_HOME/bin/java"
+    fi
+  else
+    JAVACMD="$(command -v java)" || :
+  fi
+  if [ ! -x "${JAVACMD-}" ]; then
+    echo "Cannot find 'java' — set JAVA_HOME or add java to PATH." >&2
+    return 1
+  fi
+}
+
+# hash string like Java String::hashCode
+hash_string() {
+  str="${1:-}" h=0
+  while [ -n "$str" ]; do
+    char="${str%"${str#?}"}"
+    h=$(((h * 31 + $(LC_CTYPE=C printf %d "'$char")) % 4294967296))
+    str="${str#?}"
+  done
+  printf %x\\n $h
+}
+
+verbose() { :; }
+[ "${MVNW_VERBOSE-}" != true ] || verbose() { printf %s\\n "${1-}"; }
+
+die() {
+  printf %s\\n "$1" >&2
+  exit 1
+}
+
+trim() {
+  printf "%s" "${1}" | sed -E 's/^[[:space:]]+//;s/[[:space:]]+$//'
+}
+
+# parse distributionUrl and optional distributionSha256Sum from properties
+while IFS="=" read -r key value; do
+  case "${key-}" in
+  distributionUrl) distributionUrl=$(trim "${value-}") ;;
+  distributionSha256Sum) distributionSha256Sum=$(trim "${value-}") ;;
+  esac
+done <"${0%/*}/.mvn/wrapper/maven-wrapper.properties"
+[ -n "${distributionUrl-}" ] || die "cannot read distributionUrl property in .mvn/wrapper/maven-wrapper.properties"
+
+case "$distributionUrl" in
+*?-bin.zip | *?maven-mvnd-?*-?*.zip) ;;
+*) die "distributionUrl is not valid, must match *-bin.zip or maven-mvnd-*.zip, but found '$distributionUrl'" ;;
+esac
+
+# apply MVNW_REPOURL and calculate MAVEN_HOME
+MVNW_REPOURL="${MVNW_REPOURL-}"
+[ -z "${MVNW_REPOURL-}" ] || distributionUrl="$MVNW_REPOURL/${distributionUrl#*//*/}"
+distributionUrlName="${distributionUrl##*/}"
+distributionUrlNameMain="${distributionUrlName%.*}"
+distributionUrlNameMain="${distributionUrlNameMain%-bin}"
+MAVEN_USER_HOME="${MAVEN_USER_HOME:-${HOME}/.m2}"
+MAVEN_HOME="${MAVEN_USER_HOME}/wrapper/dists/${distributionUrlNameMain-}/$(hash_string "$distributionUrl")"
+
+exec_maven() {
+  unset MVNW_VERBOSE MVNW_USERNAME MVNW_PASSWORD MVNW_REPOURL || :
+  exec "$MAVEN_HOME/bin/mvn" "$@" || die "cannot exec $MAVEN_HOME/bin/mvn"
+}
+
+if [ -d "$MAVEN_HOME" ]; then
+  verbose "found existing MAVEN_HOME at $MAVEN_HOME"
+  exec_maven "$@"
+fi
+
+case "${distributionUrl-}" in
+*?-bin.zip | *?maven-mvnd-?*-?*.zip) ;;
+*) die "distributionUrl is not valid, must match *-bin.zip or maven-mvnd-*.zip, but found '$distributionUrl'" ;;
+esac
+
+# prepare tmp dir
+if TMP_DOWNLOAD_DIR="$(mktemp -d)" && [ -d "$TMP_DOWNLOAD_DIR" ]; then
+  clean() { rm -rf -- "$TMP_DOWNLOAD_DIR"; }
+  trap clean HUP INT TERM EXIT
+else
+  die "cannot create temp dir"
+fi
+
+mkdir -p -- "${MAVEN_HOME%/*}"
+
+# download and extract maven
+verbose "downloading $distributionUrl"
+if command -v curl >/dev/null; then
+  curl -f -L -o "$TMP_DOWNLOAD_DIR/$distributionUrlName" "$distributionUrl" || die "curl download failed"
+elif command -v wget >/dev/null; then
+  wget -O "$TMP_DOWNLOAD_DIR/$distributionUrlName" "$distributionUrl" || die "wget download failed"
+else
+  die "no curl or wget available to download Maven"
+fi
+
+if command -v unzip >/dev/null; then
+  unzip -q -d "$TMP_DOWNLOAD_DIR" "$TMP_DOWNLOAD_DIR/$distributionUrlName" || die "unzip failed"
+else
+  die "unzip is required to extract the Maven distribution"
+fi
+
+printf %s\\n "$MAVEN_HOME" >&2
+mv -- "$TMP_DOWNLOAD_DIR/$distributionUrlNameMain" "$MAVEN_HOME" || die "cannot move Maven into $MAVEN_HOME"
+
+clean || :
+exec_maven "$@"
