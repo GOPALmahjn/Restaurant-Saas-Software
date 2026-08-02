@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { RestaurantProvider } from './context/RestaurantContext';
 import { UIProvider } from './context/UIContext';
+import { AuthProvider } from './context/AuthContext';
 import Layout from './components/layout/Layout';
 import HomePage from './pages/HomePage';
 import MenuPage from './pages/MenuPage';
@@ -10,6 +11,7 @@ import DishDetailPage from './pages/DishDetailPage';
 import ARViewerPage from './pages/ARViewerPage';
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
+import ProfilePage from './pages/ProfilePage';
 import './App.css';
 
 /** Scroll to top on route change, or to the section named by a hash link. */
@@ -51,6 +53,7 @@ const AnimatedRoutes = () => {
         <Route path="/ar/:id" element={<Page><ARViewerPage /></Page>} />
         <Route path="/cart" element={<Page><CartPage /></Page>} />
         <Route path="/checkout" element={<Page><CheckoutPage /></Page>} />
+        <Route path="/profile" element={<Page><ProfilePage /></Page>} />
       </Routes>
     </AnimatePresence>
   );
@@ -59,14 +62,16 @@ const AnimatedRoutes = () => {
 function App() {
   return (
     <RestaurantProvider>
-      <UIProvider>
-        <BrowserRouter>
-          <ScrollManager />
-          <Layout>
-            <AnimatedRoutes />
-          </Layout>
-        </BrowserRouter>
-      </UIProvider>
+      <AuthProvider>
+        <UIProvider>
+          <BrowserRouter>
+            <ScrollManager />
+            <Layout>
+              <AnimatedRoutes />
+            </Layout>
+          </BrowserRouter>
+        </UIProvider>
+      </AuthProvider>
     </RestaurantProvider>
   );
 }
