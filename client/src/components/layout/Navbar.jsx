@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { useRestaurant } from '../../context/RestaurantContext';
 import { useUI } from '../../context/UIContext';
+import { useAuth } from '../../context/AuthContext';
 import { restaurant } from '../../data/mockData';
 
 /* `hash` targets home-page sections; `to` targets a route. */
@@ -29,6 +30,7 @@ const NAV_LINKS = [
 const Navbar = () => {
   const { cart, theme, setTheme } = useRestaurant();
   const { openCart, openSearch, isMobileNavOpen, setMobileNavOpen } = useUI();
+  const { user, isAuthenticated } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const { scrollY } = useScroll();
   const location = useLocation();
@@ -150,9 +152,24 @@ const Navbar = () => {
               </AnimatePresence>
             </IconButton>
 
-            <IconButton label="User profile" className="hidden sm:inline-flex">
-              <User size={17} />
-            </IconButton>
+            <Link
+              to="/profile"
+              aria-label={isAuthenticated ? `Profile — ${user.name}` : 'Sign in'}
+              title={isAuthenticated ? user.name : 'Sign in'}
+              className={`hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-colors sm:inline-flex ${
+                location.pathname === '/profile'
+                  ? 'border-[#FF6B35]/40 bg-[#FF6B35]/12 text-[#FF6B35]'
+                  : isAuthenticated
+                    ? 'border-transparent bg-gradient-to-br from-[#FF6B35] to-[#FFB347] text-sm font-bold text-white'
+                    : 'border-black/10 bg-black/5 text-surface-500 hover:bg-black/10 hover:text-surface-900 dark:border-white/10 dark:bg-white/5 dark:text-[#A0AEC0] dark:hover:bg-white/10 dark:hover:text-white'
+              }`}
+            >
+              {isAuthenticated ? (
+                (user.name || user.email || '?').trim().charAt(0).toUpperCase()
+              ) : (
+                <User size={17} />
+              )}
+            </Link>
 
             {/* Cart */}
             <motion.button
@@ -217,6 +234,13 @@ const Navbar = () => {
                 </motion.div>
               ))}
               <div className="mt-1 border-t border-white/10 pt-1">
+                <NavLink
+                  to="/profile"
+                  className="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium text-[#A0AEC0] transition-colors hover:bg-white/5 hover:text-white"
+                >
+                  <User size={17} className="text-[#FF6B35]" />
+                  {isAuthenticated ? user.name : 'Sign in'}
+                </NavLink>
                 <NavLink
                   to="/cart"
                   className="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium text-[#A0AEC0] transition-colors hover:bg-white/5 hover:text-white"
